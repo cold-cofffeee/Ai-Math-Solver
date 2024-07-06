@@ -1,2 +1,1 @@
-# Image to Text Converter
- 
+# AI Math Solver
