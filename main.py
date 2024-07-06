@@ -1,7 +1,7 @@
 # main.py
 
 import streamlit as st
-from sympy import symbols, diff, integrate, sin, cos, tan, log, Matrix, solve, I, pi, simplify, expand, binomial, factorial, sqrt, Eq, exp
+from sympy import *
 import numpy as np
 
 
