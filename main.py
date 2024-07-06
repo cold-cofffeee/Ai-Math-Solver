@@ -4,6 +4,12 @@ import streamlit as st
 from sympy import symbols, diff, integrate, sin, cos, tan, log, Matrix, solve, I, pi, simplify, expand, binomial, factorial, sqrt, Eq, exp
 import numpy as np
 
+
+
+st.header('This is AI Math Solver', divider='rainbow')
+st.link_button("Contact me:", "https://www.facebook.com/hiranmayroy123/")
+
+
 def differentiate_expression(expression, variable):
     x = symbols(variable)
     try:
