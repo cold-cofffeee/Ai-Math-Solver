@@ -13,18 +13,20 @@ st.link_button("Contact me:", "https://www.facebook.com/hiranmayroy123/")
 def differentiate_expression(expression, variable):
     x = symbols(variable)
     try:
-        result = diff(expression, x)
+        expr = sympify(expression)
+        result = diff(expr, x)
         return result
-    except:
-        return "Error: Invalid expression"
+    except Exception as e:
+        return f"Error: Invalid expression - {str(e)}"
 
 def integrate_expression(expression, variable):
     x = symbols(variable)
     try:
-        result = integrate(expression, x)
+        expr = sympify(expression)
+        result = integrate(expr, x)
         return result
-    except:
-        return "Error: Invalid expression"
+    except Exception as e:
+        return f"Error: Invalid expression - {str(e)}"
 
 def evaluate_trigonometry_function(function, angle_degrees):
     angle_radians = angle_degrees * (pi / 180.0)
@@ -59,10 +61,11 @@ def perform_matrix_operations(matrix_str):
 
 def expand_binomial(expression):
     try:
-        result = expand(expression)
+        expr = sympify(expression)
+        result = expand(expr)
         return result
-    except:
-        return "Error: Invalid expression for binomial expansion"
+    except Exception as e:
+        return f"Error: Invalid expression for binomial expansion - {str(e)}"
 
 def motion_of_particle_in_plane(initial_position, initial_velocity, acceleration, time):
     try:
@@ -90,10 +93,11 @@ def solve_polynomial_equation(coefficients):
 def solve_real_numbers_inequalities(inequality):
     x = symbols('x')
     try:
-        solution = solve(inequality, x)
+        ineq = sympify(inequality)
+        solution = solve(ineq, x)
         return solution
-    except:
-        return "Error: Invalid inequality"
+    except Exception as e:
+        return f"Error: Invalid inequality - {str(e)}"
 
 def vector_operations(vectors):
     try:
@@ -136,14 +140,14 @@ def main():
     choice = st.sidebar.selectbox("Select an operation", options)
 
     if choice == "Differentiation":
-        expression = st.text_input("Enter expression to differentiate:", "")
+        expression = st.text_input("Enter expression to differentiate:", "x**2 + 3*x + 1")
         variable = st.text_input("Enter variable with respect to which you want to differentiate:", "x")
         if st.button("Differentiate"):
             result = differentiate_expression(expression, variable)
             st.write("Result:", result)
 
     elif choice == "Integration":
-        expression = st.text_input("Enter expression to integrate:", "")
+        expression = st.text_input("Enter expression to integrate:", "x**2")
         variable = st.text_input("Enter variable with respect to which you want to integrate:", "x")
         if st.button("Integrate"):
             result = integrate_expression(expression, variable)
@@ -164,13 +168,13 @@ def main():
             st.write("Result:", result)
 
     elif choice == "Matrix Operations":
-        matrix_str = st.text_area("Enter matrix as a list of lists (e.g., [[1, 2], [3, 4]]):", "")
+        matrix_str = st.text_area("Enter matrix as a list of lists (e.g., [[1, 2], [3, 4]]):", "[[1, 2], [3, 4]]")
         if st.button("Perform Operations"):
             result = perform_matrix_operations(matrix_str)
             st.write("Result:", result)
 
     elif choice == "Binomial Expansion":
-        expression = st.text_input("Enter expression for binomial expansion:", "")
+        expression = st.text_input("Enter expression for binomial expansion:", "(x + 1)**3")
         if st.button("Expand"):
             result = expand_binomial(expression)
             st.write("Result:", result)
@@ -193,20 +197,23 @@ def main():
             st.write("Result:", result)
 
     elif choice == "Solve Polynomial Equation":
-        coefficients_str = st.text_input("Enter coefficients as a list (e.g., [1, 0, -1] for x^2 - 1):", "")
+        coefficients_str = st.text_input("Enter coefficients as a list (e.g., [1, 0, -1] for x^2 - 1):", "[1, 0, -1]")
         if st.button("Solve"):
-            coefficients = eval(coefficients_str)
-            result = solve_polynomial_equation(coefficients)
-            st.write("Result:", result)
+            try:
+                coefficients = eval(coefficients_str)
+                result = solve_polynomial_equation(coefficients)
+                st.write("Result:", result)
+            except Exception as e:
+                st.write(f"Error: {str(e)}")
 
     elif choice == "Solve Inequalities":
-        inequality = st.text_input("Enter inequality (e.g., x**2 - 1 > 0):", "")
+        inequality = st.text_input("Enter inequality (e.g., x**2 - 1 > 0):", "x**2 - 1 > 0")
         if st.button("Solve"):
             result = solve_real_numbers_inequalities(inequality)
             st.write("Result:", result)
 
     elif choice == "Vector Operations":
-        vectors_input = st.text_area("Enter vectors in the form [[1, 2, 3], [4, 5, 6]]:", "")
+        vectors_input = st.text_area("Enter vectors in the form [[1, 2, 3], [4, 5, 6]]:", "[[1, 2, 3], [4, 5, 6]]")
         if st.button("Perform Operations"):
             vector_operations_result = vector_operations(vectors_input)
             st.write(f"Result:\n{vector_operations_result}")
