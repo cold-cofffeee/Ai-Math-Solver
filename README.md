@@ -2,6 +2,10 @@
 
 A Streamlit-based AI Math Solver that performs various mathematical operations including differentiation, integration, trigonometry, matrix operations, and more.
 
+## ⚠️ Important Compatibility Note
+
+**Python Version:** This project requires **Python 3.9 - 3.12**. Python 3.14 is currently too new and lacks pre-built wheels for required dependencies (Streamlit, PyArrow). Please install Python 3.12 or earlier from [python.org](https://www.python.org/downloads/).
+
 ## Features
 
 - **Differentiation**: Calculate derivatives of mathematical expressions
@@ -20,8 +24,9 @@ A Streamlit-based AI Math Solver that performs various mathematical operations i
 
 ## Installation
 
-1. Clone this repository
-2. Install the required dependencies:
+1. **Ensure you have Python 3.9 - 3.12 installed**
+2. Clone this repository
+3. Install the required dependencies:
 ```bash
 pip install -r requirements.txt
 ```
@@ -46,7 +51,14 @@ The app will open in your default web browser. Select an operation from the side
 
 ## Requirements
 
-- Python 3.7+
+- Python 3.9 - 3.12 (NOT 3.13+)
 - streamlit
 - sympy
 - numpy
+
+## Troubleshooting
+
+If you encounter installation errors, ensure:
+1. You're using Python 3.9 - 3.12 (check with `python --version`)
+2. pip is up to date: `python -m pip install --upgrade pip`
+3. All dependencies are installed: `pip install -r requirements.txt`
